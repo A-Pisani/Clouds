@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import{ AngularFireModule} from '@angular/fire'
-import{ AngularFirestoreModule} from '@angular/fire/firestore'
+import { AngularFireModule} from '@angular/fire';
+import { AngularFirestoreModule} from '@angular/fire/firestore';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -31,7 +31,7 @@ import { FormsModule } from '@angular/forms';
     AngularFirestoreModule,
     HttpClientModule,
     ChartsModule,
-    FormsModule      //<----------make sure you have added this.
+    FormsModule      // <----------make sure you have added this.
   ],
   providers: [],
   bootstrap: [AppComponent]
