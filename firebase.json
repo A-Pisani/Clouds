@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "public/clouds-covid19",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
