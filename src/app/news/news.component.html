@@ -1,0 +1,48 @@
+<nav class="navbar navbar-light bg-light navbar-right">
+  <h3>{{user!.displayName}}</h3>
+      <button class="btn btn-success btn align-content-end" (click)="newsService.toWorldwide()">Worldwide Section</button>
+      <button class="btn btn-danger btn" (click)="newsService.signOut()">Sign Out</button>
+</nav>
+
+<div class="container justify-content-between"  *ngIf="user!.editor">
+  <div class="text-center align-content-center">
+    <div class="mb-5">
+      <h1>Welcome to your Profile {{user!.displayName}} !</h1>
+      <p>Manage your covid-19 news!</p>
+    </div>
+
+    <form class="needs-validation" novalidate #userForm="ngForm" (ngSubmit)="newsService.onSubmit(userForm.value)">
+            <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" name ="description" class="form-control" id="description" placeholder="Enter News Description"  required="true" ngModel>
+      </div>
+      <div class="form-group">
+        <label for="example-date-input">Date</label>
+        <input type="date" name ="date" class="form-control" id="example-date-input" placeholder="Enter News Description"  required="true" ngModel>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="Country">Country</label>
+        <select html-required="true" id="Country" name="country" class="form-control" ngModel>
+          <option selected>Choose...</option>
+          <option>Worldwide</option>
+          <option *ngFor="let c of countries">{{c}}</option>
+        </select>
+      </div>
+
+      <button type = "submit" class="btn btn-primary">Add Your News!</button>
+    </form>
+
+  </div>
+</div>
+
+
+<div class="container justify-content-between"  *ngIf="!user!.editor">
+  <main class="px-3">
+    <h1>Sorry you are not eligible to add news.</h1>
+    <p class="lead">Unfortunately it seems that you are not eligible to add news, if you think it is an error contact the admin.</p>
+    <p class="lead">
+      <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Learn more</a>
+    </p>
+  </main>
+</div>
+

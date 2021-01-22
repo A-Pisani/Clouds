@@ -1,0 +1,13 @@
+<nav class="navbar navbar-light bg-light justify-content-between">
+  <h3>Hello! To access your profile sign in!</h3>
+  <button class="btn btn-success btn" (click)="newsService.toWorldwide()">Worldwide Section</button>
+</nav>
+<div class="text-center">
+  <div class="mb-5">
+    <h1>My profile!</h1>
+    <p>Manage your covid-19 news!</p>
+  </div>
+
+  <button class="btn btn-info" (click)="newsService.signInWithGoogle()"
+  >Sign In with Google</button>
+</div>

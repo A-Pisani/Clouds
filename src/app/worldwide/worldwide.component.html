@@ -1,0 +1,189 @@
+<ng-container *ngIf=" user=== undefined">
+  <nav class="navbar navbar-light bg-light justify-content-between">
+    <h3>To access your profile sign in !</h3>
+    <button class="btn btn-danger btn" (click)="newsService.signIn()">Sign In</button>
+  </nav>
+</ng-container>
+<ng-container *ngIf="user!== undefined">
+  <nav class="navbar navbar-light bg-light justify-content-between">
+    <h3>{{user!.displayName}}</h3>
+    <button class="btn btn-danger btn" (click)="newsService.signOut()">Sign Out</button>
+  </nav>
+</ng-container>
+<div class="text-center">
+  <h1>
+    <img style="width: 5%;" src="https://firebasestorage.googleapis.com/v0/b/clouds-covid19.appspot.com/o/coronavirus-icon-isolated-on-vector-31504476.jpg?alt=media&token=46b13833-b6f3-49bb-acea-f6996a09f501" alt="Covid image">
+    COVID-19</h1>
+  <h4 style="color:grey">Live Updates and Statistics</h4>
+  <!-- <p>{{data}}</p> -->
+  <div  class="container">
+    <nav class="navbar navbar-light bg-light"  style="margin-bottom: 10pt; margin-top: 10pt">
+      <h6 class="navbar-brand mb-0 ">Corona Virus Summary Worldwide</h6>
+    </nav>
+  <table class=" table table-striped table-bordered" style="border-color:white;">
+    <tbody class="table-hover" style="border-color:white;">
+      <tr class="table-warning">
+        <td>New Cases</td><td>{{data?.Global?.NewConfirmed.toLocaleString()}}</td>
+      </tr>
+      <tr class="table-warning">
+        <td>Total Cases</td><td>{{data?.Global?.TotalConfirmed.toLocaleString()}}</td>
+      </tr>
+      <tr class="table-warning">
+        <td>Active Cases</td><td>{{(data?.Global?.TotalConfirmed - data?.Global?.TotalRecovered).toLocaleString()}}</td>
+      </tr>
+      <tr class="table-primary">
+        <td>Total Recovered</td><td>{{data?.Global?.TotalRecovered.toLocaleString()}}</td>
+      </tr>
+      <tr class="table-primary">
+        <td>New Recovered</td><td>{{data?.Global?.NewRecovered.toLocaleString()}}</td>
+      </tr>
+      <tr class="table-primary">
+        <td>Recovery Rate</td><td>{{(data?.Global?.TotalRecovered / data?.Global?.TotalConfirmed * 100).toFixed(2)}} %</td>
+      </tr>
+      <tr class="table-danger">
+        <td>Total Deaths</td><td>{{data?.Global?.TotalDeaths.toLocaleString()}}</td>
+      </tr>
+      <tr class="table-danger">
+        <td>New Deaths</td><td>{{data?.Global?.NewDeaths.toLocaleString()}}</td>
+      </tr>
+      <tr class="table-danger">
+        <td>Mortality Rate</td><td>{{(data?.Global?.TotalDeaths / data?.Global?.TotalConfirmed * 100).toFixed(2)}} %</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <nav class="navbar navbar-light bg-light"  style="margin-bottom: 10pt; margin-top: 10pt">
+    <h6 class="navbar-brand mb-0 ">Corona Virus Cases Distribution Worldwide</h6>
+  </nav>
+      <div class="chart" style="margin-bottom: 10pt;">
+        <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"
+          [options]="pieChartOptions"
+          [plugins]="pieChartPlugins"
+          [legend]="pieChartLegend">
+        </canvas>
+  </div>
+  <nav class="navbar navbar-light bg-light"  style="margin-bottom: 10pt; margin-top: 10pt">
+    <h6 class="navbar-brand mb-0 ">Daily Corona Virus Cases Worldwide</h6>
+  </nav>
+
+  <div style="display: block;">
+    <canvas baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="barChartLegend"
+      [chartType]="barChartType">
+    </canvas>
+  </div>
+
+  <nav class="navbar navbar-light bg-light"  style="margin-bottom: 10pt; margin-top: 10pt">
+    <h6 class="navbar-brand mb-0 ">Total Corona Virus Cases Worldwide</h6>
+  </nav>
+    <div class="flex" style="margin-bottom: 10pt;">
+      <div class="flex-item">
+        <div style="display: block;">
+        <canvas baseChart width="400" height="400"
+                    [datasets]="lineChartData"
+                    [labels]="lineChartLabels"
+                    [legend]="lineChartLegend"
+                    [chartType]="lineChartType"></canvas>
+        </div>
+      </div>
+      </div>
+  <nav class="navbar navbar-light bg-light"  style="margin-bottom: 10pt; margin-top: 10pt">
+    <h6 class="navbar-brand mb-0 "> Corona Virus Cases by Country</h6>
+  </nav>
+    <table class="table table-bordered sortable table-hover">
+      <thead>
+        <tr>
+          <th class="th-inner sortable both asc"  style="color: white; background-color: rgb(85, 84, 84)">
+            <p>Country</p>
+            <button type="button" class="btn rounded-circle" style="color: white;" (click)="sortStringColumn(true)"><i class="fa fa-2x fa-angle-up"></i> </button>
+            <button type="button" class="btn btn-circle" style="color: white;" (click)="sortStringColumn(false)"> <i class="fa fa-2x fa-angle-down"></i></button>
+          </th>
+          <th class="th-inner sortable both asc table-warning">
+            <p>New Cases</p>
+            <button type="button" class="btn btn-circle" (click)="sortNumberColumn(true, 1)"><i class="fa fa-2x fa-angle-up"></i> </button>
+            <button type="button" class="btn btn-circle" (click)="sortNumberColumn(false, 1)"> <i class="fa fa-2x fa-angle-down"></i></button>
+          </th>
+          <th class="th-inner sortable both asc table-warning">
+            <p>Total Cases</p>
+            <button type="button" class="btn btn-circle" (click)="sortNumberColumn(true, 2)"><i class="fa fa-2x fa-angle-up"></i> </button>
+            <button type="button" class="btn btn-circle" (click)="sortNumberColumn(false, 2)"> <i class="fa fa-2x fa-angle-down"></i></button>
+          </th>
+          <th class="th-inner sortable both asc table-primary">
+            <p>New Recoveries</p>
+            <button type="button" class="btn btn-circle" (click)="sortNumberColumn(true, 3)"><i class="fa fa-2x fa-angle-up"></i> </button>
+            <button type="button" class="btn btn-circle" (click)="sortNumberColumn(false, 3)"> <i class="fa fa-2x fa-angle-down"></i></button>
+          </th>
+          <th class="th-inner sortable both asc table-primary">
+            <p>Total Recoveries</p>
+            <button type="button" class="btn btn-circle" (click)="sortNumberColumn(true, 4)"><i class="fa fa-2x fa-angle-up"></i> </button>
+            <button type="button" class="btn btn-circle" (click)="sortNumberColumn(false, 4)"> <i class="fa fa-2x fa-angle-down"></i></button>
+          </th>
+          <th class="th-inner sortable both asc table-danger">
+            <p>New Deaths</p>
+            <button type="button" class="btn btn-circle" (click)="sortNumberColumn(true, 5)"><i class="fa fa-2x fa-angle-up"></i> </button>
+            <button type="button" class="btn btn-circle" (click)="sortNumberColumn(false, 5)"> <i class="fa fa-2x fa-angle-down"></i></button>
+          </th>
+          <th class="th-inner sortable both asc table-danger">
+            <p>Total Deaths</p>
+            <button type="button" class="btn btn-circle" (click)="sortNumberColumn(true, 6)"><i class="fa fa-2x fa-angle-up"></i> </button>
+            <button type="button" class="btn btn-circle" (click)="sortNumberColumn(false, 6)"> <i class="fa fa-2x fa-angle-down"></i></button>
+          </th>
+        </tr>
+      </thead>
+      <tbody >
+        <tr *ngFor="let d of data?.Countries">
+          <td style="color: white; background-color : rgb(85, 84, 84)"
+          (click)="apiService.CountrySpecs(d)">{{d?.Country}}</td>
+
+          <td class="table-warning">{{d?.NewConfirmed}}</td>
+          <td class="table-warning">{{d?.TotalConfirmed}}</td>
+          <td class="table-primary">{{d?.NewRecovered}}</td>
+          <td class="table-primary">{{d?.TotalRecovered}}</td>
+          <td class="table-danger">{{d?.NewDeaths}}</td>
+          <td class="table-danger">{{d?.TotalDeaths}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="row" >
+      <ng-container *ngFor="let n of worldNews" >
+        <ng-container *ngIf="true">
+          <div class="col-sm-4" style="margin-bottom: 10pt;" >
+
+            <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Worldwide News</h5>
+              <h6 class="card-subtitle mb-2 text-muted">news by {{n.User.displayName}}</h6>
+              <p class="card-text">{{n.Description}}.</p>
+              <a href="#" class="card-link text-right">{{n.Date}}</a>
+            </div>
+            </div>
+          </div>
+
+          </ng-container>
+
+      </ng-container>
+    </div>
+</div>
+
+
+</div>
+<footer class="footer">
+  <div class="text-center container">
+    <nav class="navbar navbar-light bg-light"  style="margin-bottom: 40pt; margin-top: 10pt">
+    <p class="navbar-brand mb-0 " style="text-align: center;"> Data Source:
+      <a href="https://covid19api.com/">
+                      COVID-19 API / Johns Hopkins CSSE
+      </a>
+    </p>
+  </nav>
+  </div>
+
+</footer>
