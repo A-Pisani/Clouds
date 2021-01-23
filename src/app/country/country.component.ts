@@ -194,7 +194,8 @@ export class CountryComponent implements OnInit {
         this.barChartLabels.push(date.getDate() + ' ' + months[date.getMonth()].substring(0, 3));
         // console.log(date.getDate() + ' ' + months[date.getMonth()]);
       });
-      let j = 0, flag = 0;
+      let j = 0;
+      let flag = 0;
       for (let i = 0; i < this.data4.length; i++) {
         if (i > 0  && this.data4[i].Date === this.data4[i - 1].Date){
           if (this.barChartData[0].data !== undefined && this.barChartData[1].data !== undefined
