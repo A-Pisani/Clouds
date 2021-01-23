@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: "signin", component: SigninComponent, canActivate: [SecurePagesGuard]},
   {path: "worldwide", component: WorldwideComponent}, //see how it's called...
   {path: "country/:countryN", component: CountryComponent},
-  {path: "index.html", component: WorldwideComponent}
+  {path: "index.html", component: WorldwideComponent},
   {path: "news", component: NewsComponent, canActivate: [AuthGuard]}, //see how it's called...
   {path: "", pathMatch: "full", redirectTo: "worldwide"},
   {path: "**", redirectTo: "worldwide"} // 404 page

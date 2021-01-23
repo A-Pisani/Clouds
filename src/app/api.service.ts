@@ -16,7 +16,7 @@ export class ApiService {
   countries: any;
   private country: Country | undefined;
 
-apiURL = 'http://api.covid19api.com/summary';
+apiURL = 'https://api.covid19api.com/summary';
 // apiURL2 = 'http://api.covid19api.com/world?from=' + formatDate(dt) + 'T00:00:00Z&to=' + formatDate(new Date());
 apiURL2 = 'https://corona.lmao.ninja/v2/historical/all?lastdays=8';
 // apiURL3 = 'http://api.covid19api.com/world?from=2020-04-13T00:00:00Z&to=2021';
@@ -66,8 +66,8 @@ getCountry(countryN: string){
     const dt = new Date();
     dt.setDate(dt.getDate() - 9);
     console.log(formatDate(dt));
-    this.apiURL4 = 'http://api.covid19api.com/country/' + this.country?.Country + '?from=' + formatDate(dt) + '&to=' + formatDate(new Date());
-    this.apiURL5 = 'http://api.covid19api.com/dayone/country/' + this.country?.Country;
+    this.apiURL4 = 'https://api.covid19api.com/country/' + this.country?.Country + '?from=' + formatDate(dt) + '&to=' + formatDate(new Date());
+    this.apiURL5 = 'https://api.covid19api.com/dayone/country/' + this.country?.Country;
     this.router.navigate(['country', this.country?.Country]);
   }
 
