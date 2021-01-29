@@ -1,4 +1,15 @@
-
+<ng-container *ngIf=" user=== undefined">
+  <nav class="navbar navbar-light bg-light justify-content-between">
+    <h3>To access your profile sign in !</h3>
+    <button class="btn btn-danger btn" (click)="newsService.signIn()">Sign In</button>
+  </nav>
+</ng-container>
+<ng-container *ngIf="!(user=== undefined || user===null)">
+  <nav class="navbar navbar-light bg-light justify-content-between">
+    <h3>{{user!.displayName}}</h3>
+    <button class="btn btn-danger btn" (click)="newsService.signOut()">Sign Out</button>
+  </nav>
+</ng-container>
 <div class="text-center">
   <h1>
     <img style="width: 5%;" src="https://firebasestorage.googleapis.com/v0/b/clouds-covid19.appspot.com/o/coronavirus-icon-isolated-on-vector-31504476.jpg?alt=media&token=46b13833-b6f3-49bb-acea-f6996a09f501" alt="Covid image">
@@ -97,7 +108,9 @@
         </div>
       </div>
       </div>
-  </div>
+  <nav class="navbar navbar-light bg-light"  style="margin-bottom: 10pt; margin-top: 10pt">
+    <h6 class="navbar-brand mb-0 ">{{country?.Country}} News</h6>
+  </nav>
 
   <div class="row" >
     <ng-container *ngFor="let n of countryNews" >
@@ -125,7 +138,7 @@
     <nav class="navbar navbar-light bg-light"  style="margin-bottom: 40pt; margin-top: 10pt">
     <p class="navbar-brand mb-0 " style="text-align: center;"> Data Source:
       <a href="https://covid19api.com/">
-                      COVID-19 API / Johns Hopkins CSSE
+                      "COVID-19 API / Johns Hopkins CSSE""
       </a>
     </p>
   </nav>

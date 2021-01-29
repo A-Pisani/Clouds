@@ -16,15 +16,15 @@ export class ApiService {
   countries: any;
   private country: Country | undefined;
 
-apiURL = 'https://api.covid19api.com/summary';
+apiURL = "https://api.covid19api.com/summary";
 // apiURL2 = 'http://api.covid19api.com/world?from=' + formatDate(dt) + 'T00:00:00Z&to=' + formatDate(new Date());
-apiURL2 = 'https://corona.lmao.ninja/v2/historical/all?lastdays=8';
+apiURL2 = "https://corona.lmao.ninja/v2/historical/all?lastdays=8";
 // apiURL3 = 'http://api.covid19api.com/world?from=2020-04-13T00:00:00Z&to=2021';
-apiURL3 = 'https://corona.lmao.ninja/v2/historical/all';
+apiURL3 = "https://corona.lmao.ninja/v2/historical/all";
 
 
-apiURL4 = '';
-apiURL5 = '';
+apiURL4 = "";
+apiURL5 = "";
   getCountries(): any {
     return this.countries;
   }
@@ -66,8 +66,8 @@ getCountry(countryN: string){
     const dt = new Date();
     dt.setDate(dt.getDate() - 9);
     console.log(formatDate(dt));
-    this.apiURL4 = 'https://api.covid19api.com/country/' + this.country?.Country + '?from=' + formatDate(dt) + '&to=' + formatDate(new Date());
-    this.apiURL5 = 'https://api.covid19api.com/dayone/country/' + this.country?.Country;
+    this.apiURL4 = "https://api.covid19api.com/country/" + this.country?.Slug + "?from=" + formatDate(dt) + "&to=" + formatDate(new Date());
+    this.apiURL5 = "https://api.covid19api.com/dayone/country/" + this.country?.Slug;
     this.router.navigate(['country', this.country?.Country]);
   }
 
@@ -123,8 +123,34 @@ getCountry(countryN: string){
   }
 
   getData2(countryN: string){
-    this.apiURL4 = 'http://api.covid19api.com/country/' + countryN + '?from=' + formatDate(dt) + '&to=' + formatDate(new Date());
-    this.apiURL5 = 'http://api.covid19api.com/dayone/country/' + countryN;
+    if(countryN === "Côte d'Ivoire"){
+      countryN = 'cote-divoire'
+    }else if(countryN === "Venezuela (Bolivarian Republic)"){
+      countryN = 'venezuela'
+    }else if(countryN === "Congo (Brazzaville)"){
+      countryN = 'congo-brazzaville'
+    }else if(countryN === "Congo (Kinshasa)"){
+      countryN = 'congo-kinshasa'
+    }else if(countryN === "United States of America"){
+      countryN = 'united-states'
+    }else if(countryN === "Holy See (Vatican City State)"){
+      countryN = 'holy-see-vatican-city-state'
+    }else if(countryN === "Korea (North)"){
+      countryN = 'korea-north'
+    }else if(countryN === "Korea (South)"){
+      countryN = 'korea-south'
+    }else if(countryN === "Syrian Arab Republic (Syria)"){
+      countryN = 'syria'
+    }
+
+
+    if(countryN === "United States of America"){
+      this.apiURL4 = "https://api.covid19api.com/country/" + countryN + "?from=" + formatDate(dt) + "&to=" + formatDate(new Date());
+    }else{
+      this.apiURL4 = "https://api.covid19api.com/country/" + countryN + "?from=" + formatDate(dt) + "&to=" + formatDate(new Date());
+
+    }
+    this.apiURL5 = "https://api.covid19api.com/dayone/country/" + countryN;
     const response4 = this.httpClient.get(this.apiURL4);
     const response5 = this.httpClient.get(this.apiURL5);
     return forkJoin([response4, response5]);
@@ -132,7 +158,11 @@ getCountry(countryN: string){
 }
 
 const dt = new Date();
+const dt2 = new Date();
+
 dt.setDate(dt.getDate() - 8);
+dt2.setDate(dt.getDate() - 7);
+
 // console.log(formatDate(dt));
 
 function formatDate(date: Date) {

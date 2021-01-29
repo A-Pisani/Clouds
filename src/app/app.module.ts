@@ -34,6 +34,6 @@ import { FormsModule } from '@angular/forms';
     FormsModule      // <----------make sure you have added this.
   ],
   providers: [],
-  bootstrap: [WorldwideComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,7 @@ import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label, SingleDataSet, Color, Colors } from 'ng2-charts';
 import { Subscription } from 'rxjs';
 import { News } from 'src/news.model';
+import { User } from 'src/user.model';
 import { ApiService } from '../api.service';
 import { NewsService } from '../news.service';
 
@@ -20,6 +21,8 @@ export class CountryComponent implements OnInit {
   data!: any;
   data4!: any;
   data5!: any;
+  user: User | undefined;
+
 
   public lineChartData: ChartDataSets[] = [
     { data: [], label: 'Total Deaths' },
@@ -72,6 +75,8 @@ export class CountryComponent implements OnInit {
               public newsService: NewsService) { }
 
   ngOnInit(): void {
+    this.user = this.newsService.getUser();
+
     this.sub = this.route.params.subscribe(params => {
       this.countryName = params.countryN;
       console.log(this.countryName);
@@ -223,9 +228,15 @@ export class CountryComponent implements OnInit {
         if (this.barChartData[0].data !== undefined && this.barChartData[1].data !== undefined
           && this.barChartData[2].data !== undefined && this.barChartData2[0].data !== undefined && this.barChartData2[1].data !== undefined
           && this.barChartData2[2].data !== undefined){
-            this.barChartData2[0].data[i - 1] = ((this.barChartData[0]?.data[i] as number) - (this.barChartData[0]?.data[i - 1]as number)) ;
-            this.barChartData2[1].data[i - 1] = ((this.barChartData[1]?.data[i] as number) - (this.barChartData[1]?.data[i - 1]as number)) ;
-            this.barChartData2[2].data[i - 1] = ((this.barChartData[2]?.data[i] as number) - (this.barChartData[2]?.data[i - 1]as number)) ;
+            if((this.barChartData[0]?.data[i] as number) - (this.barChartData[0]?.data[i - 1]as number)> 0){
+              this.barChartData2[0].data[i - 1] = ((this.barChartData[0]?.data[i] as number) - (this.barChartData[0]?.data[i - 1]as number)) ;
+            }
+            if((this.barChartData[1]?.data[i] as number) - (this.barChartData[1]?.data[i - 1]as number)>0){
+              this.barChartData2[1].data[i - 1] = ((this.barChartData[1]?.data[i] as number) - (this.barChartData[1]?.data[i - 1]as number)) ;
+            }
+            if((this.barChartData[2]?.data[i] as number) - (this.barChartData[2]?.data[i - 1]as number)>0){
+              this.barChartData2[2].data[i - 1] = ((this.barChartData[2]?.data[i] as number) - (this.barChartData[2]?.data[i - 1]as number)) ;
+            }
             // console.log(this.barChartData2[0]);
           }
 
