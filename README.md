@@ -5,7 +5,7 @@ Web application that displays data about the COVID-19 exploiting several Google 
 The web development framework used is Angular with Bootstrap for design and ng2-charts to display data in charts.  
 The data to display on the web application will be retrieved from COVID19API: https://covid19api.com, sourced from Johns Hopkins CSSE.  
 
-For info or suggestions send an email @ Alessandro[dot]Pisani[at]eurecom[dot]fr.
+For info or suggestions send an email @ Alessandro.Pisani@eurecom.fr.
 
 # COVID19
 
