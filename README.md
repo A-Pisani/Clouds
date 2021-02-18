@@ -1,3 +1,12 @@
+# Clouds - COVID-19 project for CLouds course [EURECOM]
+
+The project is hosted @ https://clouds-covid19.web.app/worldwide.  
+Web application that displays data about the COVID-19 exploiting several Google Cloud Platform features such as: Hosting, Storage, Firestore and Authentication.  
+The web development framework used is Angular with Bootstrap for design and ng2-charts to display data in charts.  
+The data to display on the web application will be retrieved from COVID19API: https://covid19api.com, sourced from Johns Hopkins CSSE.  
+
+For info or suggestions send an email @ Alessandro[dot]Pisani[at]eurecom[dot]fr.
+
 # COVID19
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.2.
@@ -25,7 +34,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# Clouds - COVID-19 project for CLouds course [EURECOM]
 
-The project is hosted @ https://clouds-covid19.web.app/worldwide.  
-For info or suggestions send an email @ Alessandro[dot]Pisani[at]eurecom[dot]fr.
