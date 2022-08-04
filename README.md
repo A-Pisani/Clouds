@@ -1,5 +1,7 @@
 # Clouds - COVID-19 project for Clouds course [EURECOM]
 
+## ⚠️ The project has not seen any update recently, you may experience errors on the web app.
+
 The project is hosted @ https://clouds-covid19.web.app/worldwide.  
 
 Web application that displays data about the COVID-19 exploiting several [Google Cloud Platform](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwihpb2yx9byAhVI4YUKHXz4DuwQFnoECAcQAw&url=https%3A%2F%2Fcloud.google.com%2F&usg=AOvVaw02aG0Rc2vxvndCRTTY1Ufi) features such as: Hosting, Storage, Firestore and Authentication.  
